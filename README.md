@@ -18,7 +18,7 @@ Good article about it:
 ## Third
 We will use two libraries: spongycastle and pdfbox-android
 
-The spongycastle is the bouncycastle with little work around so it is easier use on Android.
+The spongycastle (https://glossarytech.com/terms/android/spongycastle) is the bouncycastle with little work around so it is easier use on Android.
 But it is up to you which one to use. 
 It will be used for cryptographic algorithms in order to make your application secure and also to generate a certificate.
 
@@ -33,6 +33,7 @@ Good article about it:
 - Self Sign Certificate Creation: https://medium.com/@bouhady/self-sign-certificate-creation-using-spongy-castle-for-android-app-61f1545dd63
 - https://stackoverflow.com/questions/26311678/how-to-create-certificate-pfx-file-in-java
 - Create signature: https://www.tutorialspoint.com/java_cryptography/java_cryptography_creating_signature.htm
+- If using bouncycastle: https://www.programcreek.com/java-api-examples/?api=org.bouncycastle.x509.X509V3CertificateGenerator
 
 ## Fifth
 As you can see, there are a lot of new things like KeyStore...
@@ -42,6 +43,8 @@ It is a good book (if you want to dive in):
 Also, these classes might be usefull too:
 - CreateSignature: https://pdfbox.apache.org/docs/2.0.2/javadocs/index.html?org/apache/pdfbox/examples/signature/CreateSignature.html
 - KeyStore: https://docs.oracle.com/javase/7/docs/api/java/security/KeyStore.html
+- Android Keystore Type which one should I choose?: https://stackoverflow.com/questions/5700708/android-keystore-type-which-one-should-i-choose
+- https://www.tabnine.com/code/java/methods/java.security.KeyStore/load
 
 ## Sixth
 Creating a singing.
@@ -64,6 +67,9 @@ Other useful matherials:
 (colour version: https://svn.apache.org/viewvc/pdfbox/trunk/examples/src/main/java/org/apache/pdfbox/examples/signature/CreateSignature.java?view=markup)
  
 Other:
+- https://github.com/BrentDouglas/pdfbox/blob/master/examples/src/main/java/org/apache/pdfbox/examples/signature/CreateSignature.java
+- https://github.com/BrentDouglas/pdfbox/blob/0d731505e616081e66e6bda69af563b96711c2eb/pdfbox/src/main/java/org/apache/pdfbox/pdmodel/interactive/digitalsignature/SignatureInterface.java#L30
+- https://jar-download.com/artifacts/org.apache.pdfbox/pdfbox-examples/2.0.1/source-code/org/apache/pdfbox/examples/signature/CreateVisibleSignature.java
 - https://stackoverflow.com/questions/47550563/pdf-signing-with-bouncycastle-using-pdfbox-2-x-x
 - https://github.com/mkl-public/testarea-pdfbox1/blob/master/src/main/java/mkl/testarea/pdfbox1/sign/CreateSignature.java
 - https://svn.apache.org/viewvc/pdfbox/branches/2.0/examples/src/main/java/org/apache/pdfbox/examples/signature/
