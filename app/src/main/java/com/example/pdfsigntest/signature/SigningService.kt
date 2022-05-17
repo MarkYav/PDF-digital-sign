@@ -1,11 +1,12 @@
 package com.example.pdfsigntest.signature
 
-import android.os.FileUtils
 import android.util.Log
 import com.tom_roush.pdfbox.pdmodel.PDDocument
 import com.tom_roush.pdfbox.pdmodel.interactive.digitalsignature.PDSignature
 import com.tom_roush.pdfbox.pdmodel.interactive.digitalsignature.SignatureInterface
-import java.io.*
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import java.security.KeyStore
 import java.security.KeyStoreException
 import java.security.NoSuchAlgorithmException
@@ -16,15 +17,16 @@ import java.util.*
 
 class SigningService(
     private val keyStoreType: String = "PKCS12",
-    private val keyStoreFile: File,
+    private val keyStoreFile: InputStream,
     private val keyStorePassword: String,
     private val certificateAlias: String,
     private val tsaUrl: String,
 ) {
 
-    fun signPdf(pdfToSign: File, signedPdf: File) {
+    fun signPdf(pdfToSign: InputStream, signedPdf: OutputStream) {
         try {
             val keyStore = getKeyStore()
+            //val certificateAlias = keyStore.aliases().nextElement() <--- we can get an alias this way
             val signature = Signature(keyStore, keyStorePassword.toCharArray(), certificateAlias, tsaUrl)
 
             this.signDetached(signature, pdfToSign, signedPdf)
@@ -80,15 +82,19 @@ class SigningService(
 
     private fun getKeyStore(): KeyStore {
         val keyStore = KeyStore.getInstance(keyStoreType)
-        keyStore.load(keyStoreFile.inputStream(), keyStorePassword.toCharArray())
+        keyStore.load(keyStoreFile, keyStorePassword.toCharArray())
         return keyStore
     }
 
-    private fun signDetached(signature: SignatureInterface, inFile: File, outFile: File) {
-        if (!inFile.exists()) {
+    private fun signDetached(
+        signature: SignatureInterface,
+        inFile: InputStream,
+        outFile: OutputStream
+    ) {
+        /*if (!inFile.exists()) {
             throw FileNotFoundException("Document for signing does not exist")
-        }
-        FileOutputStream(outFile).use { fos ->
+        }*/
+        outFile.use { fos ->
             PDDocument.load(inFile).use { doc ->
                 signDetached(
                     signature,

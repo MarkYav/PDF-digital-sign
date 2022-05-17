@@ -8,7 +8,7 @@ import org.spongycastle.cert.X509v3CertificateBuilder
 import org.spongycastle.cert.jcajce.JcaX509CertificateConverter
 import org.spongycastle.jce.provider.BouncyCastleProvider
 import org.spongycastle.operator.jcajce.JcaContentSignerBuilder
-import java.io.File
+import java.io.OutputStream
 import java.math.BigInteger
 import java.security.*
 import java.security.cert.X509Certificate
@@ -26,7 +26,7 @@ class CertificateService {
      */
     fun generateCertificate(
         certificateData: CertificateData,
-        keyStoreDestination: File,
+        keyStoreDestination: OutputStream,
         keyStorePassword: String,
         keyStoreType: String = "PKCS12",
     ) {
@@ -40,7 +40,7 @@ class CertificateService {
         keyStore.load(null, keyStorePassword.toCharArray())
         keyStore.setCertificateEntry(KeyStore.getDefaultType(), certificate)
 
-        keyStore.store(keyStoreDestination.outputStream(), keyStorePassword.toCharArray())
+        keyStore.store(keyStoreDestination, keyStorePassword.toCharArray())
     }
 
     /**
